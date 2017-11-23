@@ -42,10 +42,25 @@ gcc slua.c ^
 	luasocket-2.0.2\src\timeout.c ^
 	luasocket-2.0.2\src\udp.c ^
 	luasocket-2.0.2\src\wsocket.c ^
+	pbc-win\alloc.c ^
+	pbc-win\array.c ^
+	pbc-win\bootstrap.c ^
+	pbc-win\context.c ^
+	pbc-win\decode.c ^
+	pbc-win\map.c ^
+	pbc-win\pattern.c ^
+	pbc-win\proto.c ^
+	pbc-win\register.c ^
+	pbc-win\rmessage.c ^
+	pbc-win\stringpool.c ^
+	pbc-win\varint.c ^
+	pbc-win\wmessage.c ^
+	pbc-win\pbc-lua.c ^
 	-o window\x86_64\slua.dll -m64 -shared ^
 	-I.\ ^
 	-Ilua-cjson-2.1.0 ^
 	-Iluasocket-2.0.2\src ^
+	-Ipbc-win ^
 	-I%USE_LUA_PATH%\src ^
 	-Wl,--whole-archive window\x86_64\libluajit.a ^
 	-Wl,--no-whole-archive -lwsock32 -static-libgcc -static-libstdc++

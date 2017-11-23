@@ -13,7 +13,7 @@ public class cjson_test : MonoBehaviour
 	void Start()
 	{
 		l = new LuaSvr();
-		l.init(null,()=>{l.start("cjsonTest");});
+		l.init(null,()=>{l.start("cjsonTest");}, LuaSvrFlag.LSF_BASIC | LuaSvrFlag.LSF_EXTLIB | LuaSvrFlag.LSF_3RDDLL);
 	}
 
 	void Update()

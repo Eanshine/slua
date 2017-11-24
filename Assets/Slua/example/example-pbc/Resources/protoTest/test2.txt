@@ -6,7 +6,7 @@ local protobuf = require "protobuf"
 --buffer = addr:read "*a"
 --addr:close()
 
-buffer = ProtoTest.GetProtoBytes()
+buffer = ByteArrayToLString(ProtoTest.GetProtoBytes())
 
 protobuf.register(buffer)
 
@@ -20,7 +20,7 @@ local person = {
 }
 
 local buffer = protobuf.encode("tutorial.Person", person)
-ProtoTest.SetProtoBytes(buffer)
+ProtoTest.SetProtoBytes( LStringToByteArray(buffer) )
 local t = protobuf.decode("tutorial.Person", buffer)
 
 for k,v in pairs(t) do

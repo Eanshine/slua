@@ -1,3 +1,4 @@
+print "protobuf.c"
 local c = require "protobuf.c"
 
 local setmetatable = setmetatable

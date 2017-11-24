@@ -14,7 +14,7 @@ public class ProtoTest : MonoBehaviour
 	void Start()
 	{
 		l = new LuaSvr();
-		l.init(null,()=>{l.start("protoTest");});
+		l.init(null,()=>{l.start("protoTest");},LuaSvrFlag.LSF_BASIC | LuaSvrFlag.LSF_EXTLIB | LuaSvrFlag.LSF_3RDDLL);
 	}
 
 	void Update()

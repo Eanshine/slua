@@ -1,4 +1,14 @@
 
+function ByteArrayToLString(buffer)
+	return Slua.ToString(buffer:GetData())
+end
+
+function LStringToByteArray(buffer)
+	buffer = Slua.ToBytes(buffer)
+	buffer = Slua.ByteArray(buffer)
+	return buffer
+end
+
 
 local test1 = require "protoTest/test"
 local test2 = require "protoTest/test2"

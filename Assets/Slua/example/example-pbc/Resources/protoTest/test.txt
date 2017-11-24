@@ -1,14 +1,14 @@
 require "protobuf"
 
-local Application = UnityEngine.Application
+--local Application = UnityEngine.Application
 
---local dir_path = Application.dataPath .. "/Slua/Resources/protoTest"
+--local dir_path = Application.dataPath .. "/Slua/example/example-pbc/Resources/protoTest"
 
---addr = io.open(dir_path.."/addressbook.pb","rb")
---buffer = addr:read "*a"
+--local addr = io.open(dir_path.."/addressbook.pb","rb")
+--local buffer = addr:read "*a"
 --addr:close()
 
-buffer = ProtoTest.GetProtoBytes()
+local buffer = ByteArrayToLString(ProtoTest.GetProtoBytes())
 
 protobuf.register(buffer)
 
@@ -38,9 +38,7 @@ addressbook = {
 }
 
 code = protobuf.encode("tutorial.Person", addressbook)
-
-ProtoTest.SetProtoBytes(code)
-
+ProtoTest.SetProtoBytes( LStringToByteArray(code))
 decode = protobuf.decode("tutorial.Person" , code)
 
 print(decode.name)

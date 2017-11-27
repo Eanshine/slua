@@ -1,15 +1,14 @@
-#!/usr/bin/env bash
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-# copy slua copy to luajit folder
-cp slua.c luasocket-mini/* lua-cjson-2.1.0/* luajit-2.1.0-beta3/src/
-cd luajit-2.1.0-beta3
-SRCDIR=$(pwd)
 DIR=$(pwd)
 
-${NDKPATH?"Need to set NDKPATH"}
+cd luajit-2.1.0-beta3
+git clean -f
+SRCDIR=$(pwd)
 
-NDK=$NDKPATH
+
+${NDK?"Need to set NDKPATH"}
+
 NDKABI=8
 NDKVER=$NDK/toolchains/arm-linux-androideabi-4.9
 NDKP=$NDKVER/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-
@@ -24,11 +23,10 @@ DESTDIR=$DIR/android/armeabi-v7a
 mkdir -p $DESTDIR
 rm -rf "$DESTDIR"/*.a
 make clean
-make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH" TARGET_SONAME=libslua.so BUILDMODE=dynamic
-
-if [ -f $SRCDIR/src/libluajit.so ]; then
-    cp $SRCDIR/src/libluajit.so ../../Assets/Plugins/Android/libs/armeabi-v7a/libslua.so
-fi;
+git clean -f
+make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH" BUILDMODE=static
+echo $DESTDIR
+cp src/libluajit.a $DESTDIR/libluajit.a
 
 # Android/x86, x86 (i686 SSE3), Android 4.0+ (ICS)
 NDKABI=14
@@ -39,10 +37,23 @@ NDKP=$NDKVER/prebuilt/darwin-x86_64/bin/i686-linux-android-
 NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-x86"
 rm -rf "$DESTDIR"/*.a
 make clean
-make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF"
+git clean -f
+make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF" BUILDMODE=static
+cp src/libluajit.a $DESTDIR/libluajit.a
 
-if [ -f $SRCDIR/src/libluajit.so ]; then
-    cp $SRCDIR/src/libluajit.so ../../Assets/Plugins/Android/libs/x86/libslua.so
-fi;
 
-# make clean
+make clean
+git clean -f
+
+cd ../android/jni
+
+$NDK/ndk-build clean
+$NDK/ndk-build
+
+cp ../libs/armeabi-v7a/libslua.so ../../../Assets/Plugins/Android/libs/armeabi-v7a/libslua.so
+cp ../libs/x86/libslua.so ../../../Assets/Plugins/Android/libs/x86/libslua.so
+
+
+
+
+

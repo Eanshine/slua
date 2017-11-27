@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 cd "$( dirname "${BASH_SOURCE[0]}" )"
-cp slua.c luasocket-mini/* lua-cjson-2.1.0/* luajit-2.1.0-beta3/src/
+
 cd luajit-2.1.0-beta3
+git clean -f
 
 
 LIPO="xcrun -sdk iphoneos lipo"
@@ -28,16 +29,22 @@ if [ ! -e $ISDKP/strip ]; then
 fi
 
 make clean
+git clean -f
 ISDKF="-arch armv7 -isysroot $ISDK/SDKs/$ISDKVER -miphoneos-version-min=$DEVTAR"
 make HOST_CC="gcc -m32 -std=c99" CROSS="$ISDKP" TARGET_FLAGS="$ISDKF" TARGET=armv7 TARGET_SYS=iOS LUAJIT_A=libsluav7.a
+cp -f src/libsluav7.a ./../luajit-ios
 
 make clean
+git clean -f
 ISDKF="-arch armv7s -isysroot $ISDK/SDKs/$ISDKVER -miphoneos-version-min=$DEVTAR"
 make HOST_CC="gcc -m32 -std=c99" CROSS="$ISDKP" TARGET_FLAGS="$ISDKF" TARGET=armv7s TARGET_SYS=iOS LUAJIT_A=libsluav7s.a
+cp -f src/libsluav7s.a ./../luajit-ios
 
 make clean
+git clean -f
 ISDKF="-arch arm64 -isysroot $ISDK/SDKs/$ISDKVER -miphoneos-version-min=$DEVTAR"
 make HOST_CC="gcc -std=c99" CROSS="$ISDKP" TARGET_FLAGS="$ISDKF" TARGET=arm64 TARGET_SYS=iOS LUAJIT_A=libslua64.a
+cp -f src/libslua64.a ./../luajit-ios
 
 # add simulator support
 ISDK=$IXCODE/Platforms/iPhoneSimulator.platform/Developer
@@ -47,18 +54,43 @@ DEVTAR=9.0
 ISDKP=/usr/bin/
 
 make clean
+git clean -f
 ISDKF="-arch i386 -isysroot $ISDK/SDKs/$ISDKVER -mios-simulator-version-min=$DEVTAR"
 make HOST_CC="gcc -m32 -arch i386" CROSS=$ISDKP TARGET_FLAGS="$ISDKF" TARGET=i386 TARGET_SYS=iOS  LUAJIT_A=libluajit-i386.a
+cp -f src/libluajit-i386.a ./../luajit-ios
 
 
 make clean
+git clean -f
 ISDKF="-arch x86_64 -isysroot $ISDK/SDKs/$ISDKVER -mios-simulator-version-min=$DEVTAR"
 make HOST_CC="gcc -m64 -arch x86_64" CROSS=$ISDKP TARGET_FLAGS="$ISDKF" TARGET=x86_64 TARGET_SYS=iOS  LUAJIT_A=libluajit-x86_64.a CFLAGS=-DLUAJIT_ENABLE_GC64
+cp -f src/libluajit-x86_64.a ./../luajit-ios
 
-cd src
-lipo libsluav7.a -create libsluav7s.a libslua64.a libluajit-i386.a libluajit-x86_64.a -output libslua.a
-#lipo libsluav7.a -create libsluav7s.a libslua64.a -output libslua.a
+make clean
+git clean -f
 
-cp libslua.a ../../../Assets/Plugins/iOS/
+cd ..
+cd luajit-ios
+rm libluajit.a
+lipo -output libluajit.a  -create libsluav7.a libsluav7s.a libslua64.a libluajit-i386.a libluajit-x86_64.a
+rm libsluav7.a libsluav7s.a libslua64.a libluajit-i386.a libluajit-x86_64.a
+
+cd luajit-ios
+xcodebuild clean
+xcodebuild -configuration=Release -sdk iphonesimulator -arch i386
+cp build/Release-iphonesimulator/libslua.a ./libslua_i386.a
+
+xcodebuild clean
+xcodebuild -configuration=Release -sdk iphonesimulator -arch x86_64
+cp build/Release-iphonesimulator/libslua.a ./libslua_x86_64.a
+
+xcodebuild clean
+xcodebuild -configuration=Release
+cp build/Release-iphoneos/libslua.a ./libslua_arm.a
+
+lipo -output libslua.a -create libslua_i386.a libslua_x86_64.a libslua_arm.a
+rm libslua_i386.a libslua_x86_64.a libslua_arm.a
+
+cp -f libslua.a ../../Assets/Plugins/iOS/
 
 cd ..

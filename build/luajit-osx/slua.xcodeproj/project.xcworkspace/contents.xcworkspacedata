@@ -2,6 +2,96 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:slua.xcodeproj">
+      location = "group:../../luasocket-2.0.2/src/auxiliar.c">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/auxiliar.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/buffer.c">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/buffer.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/except.c">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/except.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/inet.c">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/inet.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/io.c">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/io.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/luasocket.c">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/luasocket.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/mime.c">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/mime.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/options.c">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/options.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/select.c">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/select.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/socket.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../luasocket-2.0.2/src/socket.lua">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/tcp.c">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/tcp.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/timeout.c">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/timeout.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/udp.c">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/udp.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/unix.c">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/unix.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/wsocket.c">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/wangxingbo/Documents/GitHub/slua/build/luajit-osx/slua/wsocket.h">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

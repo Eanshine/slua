@@ -26,7 +26,10 @@ Assets/Slua/Meta/Resources/lua3rdmeta.asset
 Assets/Slua/Meta/Resources/lua3rdmeta.asset.meta
 
 /standalone/NUnit.Runners.2.6.4
-Assets/Plugins/Slua_Managed/Logger.cs
 *.d
-build/android/obj/local/armeabi-v7a/libslua.so
-build/android/obj/local/x86/libslua.so
+build/android/obj/
+build/luajit-ios/build/
+build/luajit-ios/DerivedData
+
+
+*.userprefs

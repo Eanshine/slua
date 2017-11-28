@@ -14,7 +14,14 @@ public class ProtoTest : MonoBehaviour
 	void Start()
 	{
 		l = new LuaSvr();
-		l.init(null,()=>{l.start("protoTest");},LuaSvrFlag.LSF_BASIC | LuaSvrFlag.LSF_EXTLIB | LuaSvrFlag.LSF_3RDDLL);
+		l.init(null,()=>{
+            Debug.Log("---------protoTest-----------");
+            l.start("protoTest");
+            Debug.Log("---------cjsonTest-----------");
+            l.start("cjsonTest");
+            Debug.Log("---------lua_socket_test-----------");
+            l.start("lua_socket_test"); },
+            LuaSvrFlag.LSF_BASIC | LuaSvrFlag.LSF_EXTLIB | LuaSvrFlag.LSF_3RDDLL);
 	}
 
 	void Update()

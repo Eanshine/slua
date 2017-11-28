@@ -41,6 +41,7 @@ gcc slua.c ^
 	luasocket-2.0.2\src\tcp.c ^
 	luasocket-2.0.2\src\timeout.c ^
 	luasocket-2.0.2\src\udp.c ^
+	luasocket-2.0.2\src\mime.c ^
 	luasocket-2.0.2\src\wsocket.c ^
 	pbc-win\alloc.c ^
 	pbc-win\array.c ^

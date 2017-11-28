@@ -36,10 +36,10 @@ namespace SLua
         //public static extern int luaopen_socket_core(IntPtr luaState);
 
         //lua socket mime
-        //[Lua3rdDLL.LualibReg("mime.core")]
-        //[DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        //[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        //public static extern int luaopen_mime_core(IntPtr luaState);
+        [Lua3rdDLL.LualibReg("mime.core")]
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        public static extern int luaopen_mime_core(IntPtr luaState);
 
         //sproto
         //[DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]

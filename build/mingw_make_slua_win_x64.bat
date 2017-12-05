@@ -17,10 +17,8 @@ cd ..
 cd ..
 
 mingw32-make clean
-mingw32-make BUILDMODE=static CC="gcc -m64"
+mingw32-make BUILDMODE=static CC="gcc -m64" CFLAGS=-DLUAJIT_ENABLE_GC64
 copy src\libluajit.a ..\window\x86_64\libluajit.a /y
-
-
 
 cd ..
 
@@ -57,14 +55,14 @@ gcc slua.c ^
 	pbc-win\varint.c ^
 	pbc-win\wmessage.c ^
 	pbc-win\pbc-lua.c ^
-	-o window\x86_64\slua.dll -m64 -shared ^
+	-o window\x86_64\slua.dll -m64 -g -O0 -shared -funwind-tables ^
 	-I.\ ^
 	-Ilua-cjson-2.1.0 ^
 	-Iluasocket-2.0.2\src ^
 	-Ipbc-win ^
 	-I%USE_LUA_PATH%\src ^
 	-Wl,--whole-archive window\x86_64\libluajit.a ^
-	-Wl,--no-whole-archive -lwsock32 -static-libgcc -static-libstdc++
+	-Wl,--no-whole-archive -lwsock32 -static-libgcc -static-libstdc++ 
 
 copy /Y window\x86_64\slua.dll ..\Assets\Plugins\x64\slua.dll
 

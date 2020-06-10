@@ -56,11 +56,14 @@ gcc slua.c ^
 	pbc-win\varint.c ^
 	pbc-win\wmessage.c ^
 	pbc-win\pbc-lua.c ^
+	sproto-master\sproto.c ^
+	sproto-master\lsproto.c ^
 	-o window\x86\slua.dll -m32 -shared ^
 	-I.\ ^
 	-Ilua-cjson-2.1.0 ^
 	-Iluasocket-2.0.2\src ^
 	-Ipbc-win ^
+	-Isproto-master ^
 	-I%USE_LUA_PATH%\src ^
 	-Wl,--whole-archive window\x86\libluajit.a ^
 	-Wl,--no-whole-archive -lwsock32 -static-libgcc -static-libstdc++

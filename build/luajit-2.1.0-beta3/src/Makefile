@@ -110,8 +110,8 @@ XCFLAGS=
 #XCFLAGS+= -DLUAJIT_NUMMODE=1
 #XCFLAGS+= -DLUAJIT_NUMMODE=2
 #
-# Enable GC64 mode for x64.
-#XCFLAGS+= -DLUAJIT_ENABLE_GC64
+# Disable LJ_GC64 mode for x64.
+#XCFLAGS+= -DLUAJIT_DISABLE_GC64
 #
 ##############################################################################
 
@@ -158,20 +158,19 @@ XCFLAGS=
 
 ifeq (Windows,$(findstring Windows,$(OS))$(MSYSTEM)$(TERM))
   HOST_SYS= Windows
-  HOST_RM= del
 else
   HOST_SYS:= $(shell uname -s)
   ifneq (,$(findstring MINGW,$(HOST_SYS)))
     HOST_SYS= Windows
     HOST_MSYS= mingw
   endif
+  ifneq (,$(findstring MSYS,$(HOST_SYS)))
+    HOST_SYS= Windows
+    HOST_MSYS= mingw
+  endif
   ifneq (,$(findstring CYGWIN,$(HOST_SYS)))
     HOST_SYS= Windows
     HOST_MSYS= cygwin
-  endif
-  # Use Clang for OSX host.
-  ifeq (Darwin,$(HOST_SYS))
-    DEFAULT_CC= gcc
   endif
 endif
 
@@ -195,7 +194,7 @@ CCOPTIONS= $(CCDEBUG) $(ASOPTIONS)
 LDOPTIONS= $(CCDEBUG) $(LDFLAGS)
 
 HOST_CC= $(CC)
-HOST_RM= rm -f
+HOST_RM?= rm -f
 # If left blank, minilua is built and used. You can supply an installed
 # copy of (plain) Lua 5.1 or 5.2, plus Lua BitOp. E.g. with: HOST_LUA=lua
 HOST_LUA=
@@ -213,7 +212,7 @@ TARGET_CC= $(STATIC_CC)
 TARGET_STCC= $(STATIC_CC)
 TARGET_DYNCC= $(DYNAMIC_CC)
 TARGET_LD= $(CROSS)$(CC)
-TARGET_AR= $(CROSS)ar rcus 2>/dev/null
+TARGET_AR= $(CROSS)ar rcus
 TARGET_STRIP= $(CROSS)strip
 
 TARGET_LIBPATH= $(or $(PREFIX),/usr/local)/$(or $(MULTILIB),lib)
@@ -221,6 +220,7 @@ TARGET_SONAME= libluajit-$(ABIVER).so.$(MAJVER)
 TARGET_DYLIBNAME= libluajit-$(ABIVER).$(MAJVER).dylib
 TARGET_DYLIBPATH= $(TARGET_LIBPATH)/$(TARGET_DYLIBNAME)
 TARGET_DLLNAME= lua$(NODOTABIVER).dll
+TARGET_DLLDOTANAME= libluajit-$(ABIVER).dll.a
 TARGET_XSHLDFLAGS= -shared -fPIC -Wl,-soname,$(TARGET_SONAME)
 TARGET_DYNXLDOPTS=
 
@@ -244,6 +244,9 @@ ifneq (,$(findstring LJ_TARGET_X86 ,$(TARGET_TESTARCH)))
 else
 ifneq (,$(findstring LJ_TARGET_ARM ,$(TARGET_TESTARCH)))
   TARGET_LJARCH= arm
+else
+ifneq (,$(findstring LJ_TARGET_S390X ,$(TARGET_TESTARCH)))
+  TARGET_LJARCH= s390x
 else
 ifneq (,$(findstring LJ_TARGET_ARM64 ,$(TARGET_TESTARCH)))
   ifneq (,$(findstring __AARCH64EB__ ,$(TARGET_TESTARCH)))
@@ -270,6 +273,7 @@ ifneq (,$(findstring LJ_TARGET_MIPS ,$(TARGET_TESTARCH)))
   endif
 else
   $(error Unsupported target architecture)
+endif
 endif
 endif
 endif
@@ -309,15 +313,17 @@ endif
 TARGET_SYS?= $(HOST_SYS)
 ifeq (Windows,$(TARGET_SYS))
   TARGET_STRIP+= --strip-unneeded
-  TARGET_XSHLDFLAGS= -shared
+  TARGET_XSHLDFLAGS= -shared -Wl,--out-implib,$(TARGET_DLLDOTANAME)
   TARGET_DYNXLDOPTS=
+  HOST_RM= del
 else
+  TARGET_AR+= 2>/dev/null
 ifeq (,$(shell $(TARGET_CC) -o /dev/null -c -x c /dev/null -fno-stack-protector 2>/dev/null || echo 1))
   TARGET_XCFLAGS+= -fno-stack-protector
 endif
 ifeq (Darwin,$(TARGET_SYS))
   ifeq (,$(MACOSX_DEPLOYMENT_TARGET))
-    export MACOSX_DEPLOYMENT_TARGET=10.4
+    $(error missing: export MACOSX_DEPLOYMENT_TARGET=XX.YY)
   endif
   TARGET_STRIP+= -x
   TARGET_XSHLDFLAGS= -dynamiclib -single_module -undefined dynamic_lookup -fPIC
@@ -482,10 +488,6 @@ LJVM_MODE= elfasm
 LJLIB_O= lib_base.o lib_math.o lib_bit.o lib_string.o lib_table.o \
 	 lib_io.o lib_os.o lib_package.o lib_debug.o lib_jit.o lib_ffi.o
 LJLIB_C= $(LJLIB_O:.o=.c)
-
-#SLUA_O = slua.o tcp.o compat.o auxiliar.o options.o io.o timeout.o wsocket.o buffer.o inet.o luasocket.o except.o udp.o select.o lua_cjson.o fpconv.o strbuf.o 
-#PBC_O = alloc.o array.o bootstrap.o context.o decode.o map.o pattern.o proto.o register.o rmessage.o stringpool.o varint.o wmessage.o pbc-lua.o
-
 
 LJCORE_O= lj_gc.o lj_err.o lj_char.o lj_bc.o lj_obj.o lj_buf.o \
 	  lj_str.o lj_tab.o lj_func.o lj_udata.o lj_meta.o lj_debug.o \

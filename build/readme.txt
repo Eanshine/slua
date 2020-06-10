@@ -3,6 +3,13 @@ slua的去掉了luajit的支持，反馈是在arm64上不稳定。找到了openr
 https://github.com/openresty/luajit2/releases
 v2.1-20200102
 
+windows 编译中遇到的问题：
+1、mingw 报错
+/usr/bin/sh: del: command not found
+https://stackoverflow.com/questions/47874932/why-does-make-exe-try-to-run-usr-bin-sh-on-windows
+2、luasocket报错  error: unknown type name ‘luaL_reg’   
+修改luajit源代码 #define luaL_reg     luaL_Reg
+
 
 --------------------------------------------------------------------------------------------------------------------------------------
 编译各种环境的jit代码，采用luajit2.1-beta3

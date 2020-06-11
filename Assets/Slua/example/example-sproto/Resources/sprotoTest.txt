@@ -1,0 +1,16 @@
+local test1 = require "sprotoTest.testall"
+
+
+
+print("test all finished")
+
+local test2 = require "sprotoTest.test"
+print("test finished")
+
+local testrpc = require "sprotoTest.testrpc"
+print("testrpc finished")
+
+
+function main()
+
+end

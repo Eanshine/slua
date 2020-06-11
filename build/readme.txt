@@ -14,6 +14,9 @@ https://stackoverflow.com/questions/47874932/why-does-make-exe-try-to-run-usr-bi
 3、sproto编译不过
 修改sproto编译不过的。 一个注释掉自定义lua_tointegerx，另外LUAMOD_API改成LUALIB_API
 
+4、LPEG来自tolua库的buid
+https://github.com/topameng/tolua_runtime
+
 编译windows：
 mingw_make_slua_win_x64.bat
 mingw_make_slua_win_x86.bat

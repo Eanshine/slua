@@ -7,8 +7,16 @@ windows 编译中遇到的问题：
 1、mingw 报错
 /usr/bin/sh: del: command not found
 https://stackoverflow.com/questions/47874932/why-does-make-exe-try-to-run-usr-bin-sh-on-windows
+
 2、luasocket报错  error: unknown type name ‘luaL_reg’   
-修改luajit源代码 #define luaL_reg     luaL_Reg
+修改luajit源代码  增加 #define luaL_reg     luaL_Reg
+
+3、sproto编译不过
+修改sproto编译不过的。 一个注释掉自定义lua_tointegerx，另外LUAMOD_API改成LUALIB_API
+
+编译windows：
+mingw_make_slua_win_x64.bat
+mingw_make_slua_win_x86.bat
 
 
 --------------------------------------------------------------------------------------------------------------------------------------

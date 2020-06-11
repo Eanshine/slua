@@ -42,9 +42,17 @@ namespace SLua
         public static extern int luaopen_mime_core(IntPtr luaState);
 
         //sproto
-        //[DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        //[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        //public static extern int luaopen_sproto_core(IntPtr luaState);
+        [Lua3rdDLL.LualibReg("sproto.core")]
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        public static extern int luaopen_sproto_core(IntPtr luaState);
+
+
+        //lpeg
+        [Lua3rdDLL.LualibReg("lpeg")]
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        public static extern int luaopen_lpeg(IntPtr luaState);
 
         //sqlite
         //[DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]

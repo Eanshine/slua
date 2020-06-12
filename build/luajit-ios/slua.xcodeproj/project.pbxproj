@@ -41,6 +41,9 @@
 		F327AEC51FCD22CF00FB1E4B /* strbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = F327AEC11FCD22CF00FB1E4B /* strbuf.c */; };
 		F327AEC61FCD22CF00FB1E4B /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = F327AEC21FCD22CF00FB1E4B /* fpconv.c */; };
 		F327AEC71FCD22CF00FB1E4B /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = F327AEC31FCD22CF00FB1E4B /* lua_cjson.c */; };
+		F33EA0512493B40C0060483A /* sproto.c in Sources */ = {isa = PBXBuildFile; fileRef = F33EA04E2493B40C0060483A /* sproto.c */; };
+		F33EA0522493B40C0060483A /* lsproto.c in Sources */ = {isa = PBXBuildFile; fileRef = F33EA0502493B40C0060483A /* lsproto.c */; };
+		F33EA0562493B4290060483A /* lpeg.c in Sources */ = {isa = PBXBuildFile; fileRef = F33EA0552493B4290060483A /* lpeg.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -119,6 +122,12 @@
 		F327AEC21FCD22CF00FB1E4B /* fpconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fpconv.c; path = "../lua-cjson-2.1.0/fpconv.c"; sourceTree = "<group>"; };
 		F327AEC31FCD22CF00FB1E4B /* lua_cjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_cjson.c; path = "../lua-cjson-2.1.0/lua_cjson.c"; sourceTree = "<group>"; };
 		F327AEC41FCD22CF00FB1E4B /* fpconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fpconv.h; path = "../lua-cjson-2.1.0/fpconv.h"; sourceTree = "<group>"; };
+		F33EA04D2493B40C0060483A /* msvcint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = msvcint.h; path = "../sproto-master/msvcint.h"; sourceTree = "<group>"; };
+		F33EA04E2493B40C0060483A /* sproto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sproto.c; path = "../sproto-master/sproto.c"; sourceTree = "<group>"; };
+		F33EA04F2493B40C0060483A /* sproto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sproto.h; path = "../sproto-master/sproto.h"; sourceTree = "<group>"; };
+		F33EA0502493B40C0060483A /* lsproto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lsproto.c; path = "../sproto-master/lsproto.c"; sourceTree = "<group>"; };
+		F33EA0542493B4290060483A /* lpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lpeg.h; path = ../lpeg/lpeg.h; sourceTree = "<group>"; };
+		F33EA0552493B4290060483A /* lpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lpeg.c; path = ../lpeg/lpeg.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +145,8 @@
 		8E013A741B9CA51E00F248D8 = {
 			isa = PBXGroup;
 			children = (
+				F33EA0532493B41D0060483A /* lpeg */,
+				F33EA04C2493B3E80060483A /* sproto-master */,
 				8E0404321BA881B500C60FB2 /* luasocket */,
 				8E39FB001BA57C8600B2114F /* pbc */,
 				8E39FAC71BA5528A00B2114F /* cjson */,
@@ -234,6 +245,26 @@
 			name = pbc;
 			sourceTree = "<group>";
 		};
+		F33EA04C2493B3E80060483A /* sproto-master */ = {
+			isa = PBXGroup;
+			children = (
+				F33EA0502493B40C0060483A /* lsproto.c */,
+				F33EA04D2493B40C0060483A /* msvcint.h */,
+				F33EA04E2493B40C0060483A /* sproto.c */,
+				F33EA04F2493B40C0060483A /* sproto.h */,
+			);
+			name = "sproto-master";
+			sourceTree = "<group>";
+		};
+		F33EA0532493B41D0060483A /* lpeg */ = {
+			isa = PBXGroup;
+			children = (
+				F33EA0552493B4290060483A /* lpeg.c */,
+				F33EA0542493B4290060483A /* lpeg.h */,
+			);
+			name = lpeg;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -316,12 +347,15 @@
 				8E39FB9C1BA5965100B2114F /* pbc-lua.c in Sources */,
 				8E39FB8E1BA5963E00B2114F /* array.c in Sources */,
 				8E04045C1BA881D900C60FB2 /* select.c in Sources */,
+				F33EA0522493B40C0060483A /* lsproto.c in Sources */,
 				8E39FB971BA5963E00B2114F /* stringpool.c in Sources */,
 				F327AEC51FCD22CF00FB1E4B /* strbuf.c in Sources */,
 				8E39FB961BA5963E00B2114F /* rmessage.c in Sources */,
 				8E39FB991BA5963E00B2114F /* wmessage.c in Sources */,
+				F33EA0562493B4290060483A /* lpeg.c in Sources */,
 				8E0404581BA881D900C60FB2 /* luasocket.c in Sources */,
 				8E04045F1BA881D900C60FB2 /* udp.c in Sources */,
+				F33EA0512493B40C0060483A /* sproto.c in Sources */,
 				8E0404601BA881D900C60FB2 /* unix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

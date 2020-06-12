@@ -46,7 +46,18 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 2、编译bundle时，去掉了32位系统的支持。新版的xcode也不支持
 
 
+-----------------------------------------------------------------------------------------
+Mac 上编译ios 遇到的问题
+1、 编译 arm64时。lj_dispatch_update 函数 使用时候的没有声明
+在lj_gc.c增加
+#include "lj_dispatch.h"
 
+2、编译ios的模拟器版本时，报错
+lib_os.c:52:14: error: 'system' is unavailable: not available on iOS
+阅读代码后修改了lj_arch.h
+大概是luajit不认为自己是ios平台。
+改代码可以编译通过。但是没有必要。去掉模拟器的支持吧，我们也不太需要这个。 有需求的时候改成lua吧。
+更多信息搜索 luajit 模拟器
 
 
 

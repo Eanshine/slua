@@ -17,6 +17,18 @@ https://stackoverflow.com/questions/47874932/why-does-make-exe-try-to-run-usr-bi
 4、LPEG来自tolua库的buid
 https://github.com/topameng/tolua_runtime
 
+------------------------------------------------------------------------------------------
+Mac 上编译Android遇到的问题
+1、make clean 报错了
+OSX: Don't set a default MACOSX_DEPLOYMENT_TARGET.
+解决办法：
+https://github.com/LuaJIT/LuaJIT/issues/538
+下载了Mac 10.12的sdk
+解压后的文件夹拷贝到了xcode的对应目录
+修改make_android.sh, 
+在make的命令上加上了MACOSX_DEPLOYMENT_TARGET="10.12"
+
+
 编译windows：
 mingw_make_slua_win_x64.bat
 mingw_make_slua_win_x86.bat

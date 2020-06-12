@@ -22,9 +22,9 @@ NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm"
 DESTDIR=$DIR/android/armeabi-v7a
 mkdir -p $DESTDIR
 rm -rf "$DESTDIR"/*.a
-make clean
+make clean MACOSX_DEPLOYMENT_TARGET="10.12"
 git clean -f
-make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH" BUILDMODE=static
+make HOST_CC="gcc -m32" MACOSX_DEPLOYMENT_TARGET="10.12" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH" BUILDMODE=static
 echo $DESTDIR
 cp src/libluajit.a $DESTDIR/libluajit.a
 
@@ -36,11 +36,26 @@ NDKVER=$NDK/toolchains/x86-4.9
 NDKP=$NDKVER/prebuilt/darwin-x86_64/bin/i686-linux-android-
 NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-x86"
 rm -rf "$DESTDIR"/*.a
-make clean
+make clean MACOSX_DEPLOYMENT_TARGET="10.12"
 git clean -f
-make HOST_CC="gcc -m32" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF" BUILDMODE=static
+make HOST_CC="gcc -m32" MACOSX_DEPLOYMENT_TARGET="10.12" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF" BUILDMODE=static
+echo $DESTDIR
 cp src/libluajit.a $DESTDIR/libluajit.a
 
+# Android/ARM, arm64-v8a
+NDKABI=21
+NDKARCH="-march=armv8-a "
+DESTDIR=$DIR/android/arm64-v8a
+mkdir -p $DESTDIR
+NDKVER=$NDK/toolchains/aarch64-linux-android-4.9
+NDKP=$NDKVER/prebuilt/darwin-x86_64/bin/aarch64-linux-android-
+NDKF="--sysroot $NDK/platforms/android-$NDKABI/arch-arm64"
+rm -rf "$DESTDIR"/*.a
+make clean MACOSX_DEPLOYMENT_TARGET="10.12"
+git clean -f
+make HOST_CC="gcc -m64" MACOSX_DEPLOYMENT_TARGET="10.12" CROSS=$NDKP TARGET_SYS=Linux TARGET_FLAGS="$NDKF $NDKARCH" BUILDMODE=static
+echo $DESTDIR
+cp src/libluajit.a $DESTDIR/libluajit.a
 
 make clean
 git clean -f
@@ -52,6 +67,7 @@ $NDK/ndk-build
 
 cp ../libs/armeabi-v7a/libslua.so ../../../Assets/Plugins/Android/libs/armeabi-v7a/libslua.so
 cp ../libs/x86/libslua.so ../../../Assets/Plugins/Android/libs/x86/libslua.so
+cp ../libs/arm64-v8a/libslua.so ../../../Assets/Plugins/Android/libs/arm64-v8a/libslua.so
 
 
 

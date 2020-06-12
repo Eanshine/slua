@@ -15,6 +15,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../luajit-2.1.0-beta3/src
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../pbc-master
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../lua-cjson-2.1.0
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../luasocket-2.0.2/src
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../sproto-master
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../lpeg
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../
 
 LOCAL_CPPFLAGS := -03 -ffast-math
@@ -50,6 +52,10 @@ LOCAL_SRC_FILES := ../../slua.c \
 				   ../../luasocket-2.0.2/src/udp.c \
 				   ../../luasocket-2.0.2/src/unix.c \
 				   ../../luasocket-2.0.2/src/usocket.c \
+				   ../../sproto-master/sproto.c \
+				   ../../sproto-master/lsproto.c \
+				   ../../lpeg/lpeg.c \
+				   
 
 LOCAL_WHOLE_STATIC_LIBRARIES += libluajit
 include $(BUILD_SHARED_LIBRARY)

@@ -3,6 +3,10 @@ slua的去掉了luajit的支持，反馈是在arm64上不稳定。找到了openr
 https://github.com/openresty/luajit2/releases
 v2.1-20200102
 
+编译windows：
+mingw_make_slua_win_x64.bat
+mingw_make_slua_win_x86.bat
+
 windows 编译中遇到的问题：
 1、mingw 报错
 /usr/bin/sh: del: command not found
@@ -18,7 +22,9 @@ https://stackoverflow.com/questions/47874932/why-does-make-exe-try-to-run-usr-bi
 https://github.com/topameng/tolua_runtime
 
 ------------------------------------------------------------------------------------------
-Mac 上编译Android遇到的问题
+Mac 上编译Android遇到的问题。
+make_android.sh
+
 1、make clean 报错了
 OSX: Don't set a default MACOSX_DEPLOYMENT_TARGET.
 解决办法：
@@ -28,10 +34,21 @@ https://github.com/LuaJIT/LuaJIT/issues/538
 修改make_android.sh, 
 在make的命令上加上了MACOSX_DEPLOYMENT_TARGET="10.12"
 
+-----------------------------------------------------------------------------------------
+Mac 上编译Mac osx 遇到问题
+make_osx_jit.sh
+首先必须在make的命令上加上了MACOSX_DEPLOYMENT_TARGET="10.12" 
 
-编译windows：
-mingw_make_slua_win_x64.bat
-mingw_make_slua_win_x86.bat
+1、"_luaL_callmeta", referenced from:
+https://github.com/LuaJIT/LuaJIT/issues/466
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+2、编译bundle时，去掉了32位系统的支持。新版的xcode也不支持
+
+
+
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------

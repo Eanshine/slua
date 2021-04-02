@@ -3,6 +3,10 @@ slua的去掉了luajit的支持，反馈是在arm64上不稳定。找到了openr
 https://github.com/openresty/luajit2/releases
 v2.1-20200102
 
+编译windows：
+mingw_make_slua_win_x64.bat
+mingw_make_slua_win_x86.bat
+
 windows 编译中遇到的问题：
 1、mingw 报错
 /usr/bin/sh: del: command not found
@@ -18,7 +22,9 @@ https://stackoverflow.com/questions/47874932/why-does-make-exe-try-to-run-usr-bi
 https://github.com/topameng/tolua_runtime
 
 ------------------------------------------------------------------------------------------
-Mac 上编译Android遇到的问题
+Mac 上编译Android遇到的问题。
+make_android.sh
+
 1、make clean 报错了
 OSX: Don't set a default MACOSX_DEPLOYMENT_TARGET.
 解决办法：
@@ -28,10 +34,32 @@ https://github.com/LuaJIT/LuaJIT/issues/538
 修改make_android.sh, 
 在make的命令上加上了MACOSX_DEPLOYMENT_TARGET="10.12"
 
+-----------------------------------------------------------------------------------------
+Mac 上编译Mac osx 遇到问题
+make_osx_jit.sh
+首先必须在make的命令上加上了MACOSX_DEPLOYMENT_TARGET="10.12" 
 
-编译windows：
-mingw_make_slua_win_x64.bat
-mingw_make_slua_win_x86.bat
+1、"_luaL_callmeta", referenced from:
+https://github.com/LuaJIT/LuaJIT/issues/466
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+2、编译bundle时，去掉了32位系统的支持。新版的xcode也不支持
+
+
+-----------------------------------------------------------------------------------------
+Mac 上编译ios 遇到的问题
+1、 编译 arm64时。lj_dispatch_update 函数 使用时候的没有声明
+在lj_gc.c增加
+#include "lj_dispatch.h"
+
+2、编译ios的模拟器版本时，报错
+lib_os.c:52:14: error: 'system' is unavailable: not available on iOS
+阅读代码后修改了lj_arch.h
+大概是luajit不认为自己是ios平台。
+改代码可以编译通过。但是没有必要。去掉模拟器的支持吧，我们也不太需要这个。 有需求的时候改成lua吧。
+更多信息搜索 luajit 模拟器
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------

@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4942CE831B9D9D7100858CB0 /* libluajit_x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4942CE811B9D9D7100858CB0 /* libluajit_x86_64.a */; };
-		4942CE841B9D9D7100858CB0 /* libluajit_x86.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4942CE821B9D9D7100858CB0 /* libluajit_x86.a */; };
 		49A357121BA0392800A0FA50 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 49A357111BA0392800A0FA50 /* main.c */; };
+		F33EA0452493AE050060483A /* lsproto.c in Sources */ = {isa = PBXBuildFile; fileRef = F33EA0432493AE040060483A /* lsproto.c */; };
+		F33EA0462493AE050060483A /* sproto.c in Sources */ = {isa = PBXBuildFile; fileRef = F33EA0442493AE040060483A /* sproto.c */; };
+		F33EA0492493AE310060483A /* lpeg.c in Sources */ = {isa = PBXBuildFile; fileRef = F33EA0482493AE310060483A /* lpeg.c */; };
 		F3D6D0A41FCC0843002876E2 /* slua.c in Sources */ = {isa = PBXBuildFile; fileRef = F3D6D0A31FCC0843002876E2 /* slua.c */; };
 		F3D6D0C41FCC0B27002876E2 /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = F3D6D0C11FCC0B27002876E2 /* fpconv.c */; };
 		F3D6D0C51FCC0B27002876E2 /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = F3D6D0C21FCC0B27002876E2 /* lua_cjson.c */; };
@@ -46,10 +48,12 @@
 
 /* Begin PBXFileReference section */
 		4942CE811B9D9D7100858CB0 /* libluajit_x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libluajit_x86_64.a; sourceTree = "<group>"; };
-		4942CE821B9D9D7100858CB0 /* libluajit_x86.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libluajit_x86.a; sourceTree = "<group>"; };
 		49A357111BA0392800A0FA50 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E80919D41B745519008FED27 /* slua.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slua.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80919D81B745519008FED27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F33EA0432493AE040060483A /* lsproto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lsproto.c; path = "../../sproto-master/lsproto.c"; sourceTree = "<group>"; };
+		F33EA0442493AE040060483A /* sproto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sproto.c; path = "../../sproto-master/sproto.c"; sourceTree = "<group>"; };
+		F33EA0482493AE310060483A /* lpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lpeg.c; path = ../../lpeg/lpeg.c; sourceTree = "<group>"; };
 		F3D6D0A31FCC0843002876E2 /* slua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = slua.c; path = ../../slua.c; sourceTree = "<group>"; };
 		F3D6D0C11FCC0B27002876E2 /* fpconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fpconv.c; path = "../../lua-cjson-2.1.0/fpconv.c"; sourceTree = "<group>"; };
 		F3D6D0C21FCC0B27002876E2 /* lua_cjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_cjson.c; path = "../../lua-cjson-2.1.0/lua_cjson.c"; sourceTree = "<group>"; };
@@ -90,7 +94,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4942CE831B9D9D7100858CB0 /* libluajit_x86_64.a in Frameworks */,
-				4942CE841B9D9D7100858CB0 /* libluajit_x86.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				4942CE811B9D9D7100858CB0 /* libluajit_x86_64.a */,
-				4942CE821B9D9D7100858CB0 /* libluajit_x86.a */,
 				E80919D61B745519008FED27 /* slua */,
 				E80919D51B745519008FED27 /* Products */,
 			);
@@ -118,6 +120,8 @@
 		E80919D61B745519008FED27 /* slua */ = {
 			isa = PBXGroup;
 			children = (
+				F33EA0472493AE160060483A /* lpeg */,
+				F33EA0422493ADDF0060483A /* sproto */,
 				F3D6D0E61FCC0C93002876E2 /* pbc */,
 				F3D6D0C71FCC0B3D002876E2 /* luasocket */,
 				F3D6D0BE1FCC0964002876E2 /* cjson */,
@@ -134,6 +138,23 @@
 				E80919D81B745519008FED27 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F33EA0422493ADDF0060483A /* sproto */ = {
+			isa = PBXGroup;
+			children = (
+				F33EA0432493AE040060483A /* lsproto.c */,
+				F33EA0442493AE040060483A /* sproto.c */,
+			);
+			name = sproto;
+			sourceTree = "<group>";
+		};
+		F33EA0472493AE160060483A /* lpeg */ = {
+			isa = PBXGroup;
+			children = (
+				F33EA0482493AE310060483A /* lpeg.c */,
+			);
+			name = lpeg;
 			sourceTree = "<group>";
 		};
 		F3D6D0BE1FCC0964002876E2 /* cjson */ = {
@@ -259,6 +280,7 @@
 				F3D6D0C41FCC0B27002876E2 /* fpconv.c in Sources */,
 				F3D6D0DA1FCC0BD4002876E2 /* inet.c in Sources */,
 				F3D6D0FF1FCC0CD0002876E2 /* alloc.c in Sources */,
+				F33EA0452493AE050060483A /* lsproto.c in Sources */,
 				F3D6D1001FCC0CD0002876E2 /* register.c in Sources */,
 				F3D6D0D91FCC0BD4002876E2 /* tcp.c in Sources */,
 				F3D6D0F81FCC0CD0002876E2 /* context.c in Sources */,
@@ -267,6 +289,7 @@
 				F3D6D0F51FCC0CD0002876E2 /* bootstrap.c in Sources */,
 				F3D6D0DD1FCC0BD4002876E2 /* timeout.c in Sources */,
 				F3D6D0FE1FCC0CD0002876E2 /* stringpool.c in Sources */,
+				F33EA0462493AE050060483A /* sproto.c in Sources */,
 				F3D6D0A41FCC0843002876E2 /* slua.c in Sources */,
 				F3D6D1011FCC0CD0002876E2 /* varint.c in Sources */,
 				F3D6D0E41FCC0C7E002876E2 /* mime.c in Sources */,
@@ -283,6 +306,7 @@
 				F3D6D0D81FCC0BD4002876E2 /* options.c in Sources */,
 				F3D6D0E11FCC0BD4002876E2 /* buffer.c in Sources */,
 				F3D6D0E01FCC0BD4002876E2 /* select.c in Sources */,
+				F33EA0492493AE310060483A /* lpeg.c in Sources */,
 				F3D6D0FC1FCC0CD0002876E2 /* pattern.c in Sources */,
 				F3D6D0DC1FCC0BD4002876E2 /* auxiliar.c in Sources */,
 				F3D6D0DB1FCC0BD4002876E2 /* except.c in Sources */,
@@ -329,7 +353,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -367,7 +391,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "./../luasocket-2.0.2/src";
@@ -377,7 +401,7 @@
 		E80919DC1B745519008FED27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_NO_COMMON_BLOCKS = NO;
@@ -393,7 +417,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
-				USER_HEADER_SEARCH_PATHS = "../luajit-2.1.0-beta3/src";
+				USER_HEADER_SEARCH_PATHS = "../lua-cjson-2.1.0 ../luasocket-2.0.2/src ../pbc-master ../sproto-master ../lpeg ../luajit-2.1.0-beta3/src";
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -401,7 +426,7 @@
 		E80919DD1B745519008FED27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
@@ -417,7 +442,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
-				USER_HEADER_SEARCH_PATHS = "../luajit-2.1.0-beta3/src";
+				USER_HEADER_SEARCH_PATHS = "../lua-cjson-2.1.0 ../luasocket-2.0.2/src ../pbc-master ../sproto-master ../lpeg ../luajit-2.1.0-beta3/src";
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
